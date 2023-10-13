@@ -1,38 +1,23 @@
-import math 
+def minEatingSpeed(piles, h):
+    import math 
+    l, r = 1, max(piles)
+    res = r 
 
-def minmax(array) :
-    big = -math.inf
-    small = math.inf
-    for integer in array : 
-        if integer < small : 
-            small = integer 
-        if integer > big : 
-            big = integer
-    return [big, small] 
+    while l <= r :
+        middle = (l + r) // 2 
+        hours = 0 
+        for p in piles:
+            hours += math.ceil(p / middle)
 
-
-def minEatingSpeed(piles, h) :
-
-    biggest_element = max(piles)
+        if hours <= h :
+            res = min(res, middle)
+            r = middle - 1 
+        else :
+            l = middle + 1 
     
-    if len(piles) == h : return biggest_element
-    left = 0 
-    right = len(piles) - 1 
-    while left <= right : 
-        middle = (right - left) // 2 
-        number_eaten = (middle + 1) + math.ceil(biggest_element / piles[middle]) * middle 
-        if number_eaten == h: 
-            return piles[middle]
-        elif number_eaten < h :
-            left += middle + 1 
-        else : 
-            right -= middle - 1 
-    
+    return res 
 
 
-
-
-
-piles = [3,6,7,11]
-hours = 8 
+piles = [30,11,23,4,20]
+hours = 6
 minEatingSpeed(piles, hours)
