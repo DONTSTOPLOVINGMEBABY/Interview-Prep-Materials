@@ -1,64 +1,68 @@
-def reverse_words(arr):
-  '''
+# def reverse_words(arr):
+#   stack = []
+#   word = []
   
-  The idea is that we can loop through the arr list and build subarrays for 
-  all of the words in the array. 
-  
-  Once this has completed, we will initialize a blank list ([None] * len(arr)) 
-  with the same length of list arr. We can then iterate backwards through the subarray 
-  list, and place them in the correct location in our new blank array 
-  
-    - When it comes time to placing the contents of the subarray into the array, we can 
-    use python's unpacking method
-  
-  ** Edge Cases ** 
- 
-  a '  ' '  ' '  ' d
- 
-  d ' ' ' ' ' ' a 
-   
-   One way we can handle where the word we will be reversing is actually the special string, 
-   is by checking to make sure that the string ahead of our current character is the special string 
-   
-  '''
-  
-  if len(arr) <= 4 : return arr[::-1] 
-  
-  SPECIAL_CHAR = ' '
-  
-  chunks = [[]]
-  chunks_ctr = 0
-  
-  return_array = [None] * len(arr)
-  
-  for index, letter in enumerate(arr): 
-    if index != 0 and index != len(arr) - 1 and letter == SPECIAL_CHAR:
-      chunks.append([])
-      chunks_ctr += 1 
-      if arr[index - 1] == SPECIAL_CHAR and arr[index + 1] == SPECIAL_CHAR:
-        chunks[chunks_ctr].append(SPECIAL_CHAR)
-    else : 
-        chunks[chunks_ctr].append(letter)
-  
-  return_ctr = 0 
-  words_seen = 0 
-  print(chunks[::-1])
-  for word in chunks[::-1]:
-    words_seen +=1 
-    for char in word:
-      return_array[return_ctr] = char 
-      return_ctr += 1 
+#   for char in arr :
     
-    if words_seen != len(chunks):
-      return_ctr += 1
-      return_array[return_ctr] = SPECIAL_CHAR 
-      return_ctr += 1
+#     if char != ' ':
+#       word.append(char)
+#       continue 
+#     else:
+#       stack.append(word)
+#       word = []
+#       stack.append([' '])
   
-  return return_array
+#   print(stack)
+#   print(word)
+#   if word :
+#     stack.append(word)
+    
+#   result = []
+#   while stack : 
+#     result.extend(stack.pop())
+  
+#   return result
+    
+
+def reverse_words(arr):
+  
+  n = len(arr)
+  reverseInPlace(arr, 0, n - 1)
+  wordStart = None 
+  
+  print(arr)
+  
+  for index in range(n): 
+    
+    if arr[index] == ' ':
+      if wordStart != None :
+        reverseInPlace(arr, wordStart, index - 1)
+        wordStart = None 
+    elif index == n - 1 : 
+      if wordStart != None :
+        reverseInPlace(arr, wordStart, n -1)
+    else:
+      if wordStart == None :
+        wordStart = index 
+  
+  return arr
+
+def reverseInPlace(arr, start, finish): 
+  tmp = None 
+  while start < finish :
+    temp = arr[start]
+    arr[start] = arr[finish]
+    arr[finish] = temp 
+    start += 1 
+    finish -= 1  
 
 
+reverse_words(["a"," "," ","b"])
 
 
+# arr = [ 'p', 'e', 'r', 'f', 'e', 'c', 't', '  ',
+# 'm', 'a', 'k', 'e', 's', '  ',
+# 'p', 'r', 'a', 'c', 't', 'i', 'c', 'e' ]
 
-input_array =  ["p","e","r","f","e","c","t"," ","m","a","k","e","s"," ","p","r","a","c","t","i","c","e"]
-reverse_words(input_array)
+
+# print(reverse_words(arr))
