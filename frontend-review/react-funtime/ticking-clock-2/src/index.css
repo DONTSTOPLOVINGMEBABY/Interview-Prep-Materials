@@ -1,0 +1,51 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+div {
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#clock {
+  height: 500px;
+  width: 500px;
+  border-radius: 50%;
+  border: black 2px solid;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.clock-number {
+  font-size: 25px;
+  font-weight: 500;
+  position: absolute;
+  inset: 20px;
+}
+
+#one {
+  transform: rotate(calc(-1 * 30deg));
+}
+
+#two {
+  transform: rotate(calc(-2 * 30deg));
+}
+
+
+
+/*
+Circle height is 500px 
+Circle width is 500px
+
+*/

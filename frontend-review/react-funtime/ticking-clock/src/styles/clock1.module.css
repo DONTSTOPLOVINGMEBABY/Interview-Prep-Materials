@@ -1,0 +1,23 @@
+#wrapClock {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clockFace {
+    height: 500px;
+    width: 500px;
+    border-radius: 50%;
+    border: 4px solid black;
+    position: relative;
+}
+
+.bigNumber {
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}

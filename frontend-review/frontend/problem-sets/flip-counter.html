@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flip Counter</title>
+    <style>
+      body {
+        width: 100vw ; 
+        height: 100vh ;
+        display: flex; 
+        justify-content: center;
+        align-items: center; 
+        margin: 0px ; 
+      }
+      .container {
+        height: 200px; 
+        width: 400px; 
+        display: flex ; 
+        justify-content: space-between ; 
+      }
+      
+      .ticker {
+        width: 46% ;
+        height: 100% ; 
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        font-size: 150px ; 
+        background-color: #323232 ; 
+        border-radius: 5% ; 
+        color: #CCCCCC; 
+      }
+    </style>
+</head>
+<body>
+<div class="container">
+  <div class="ticker" id="minute-ticker">
+    0
+  </div>
+  <div class="ticker" id="second-ticker">
+    0
+  </div>
+</div>
+<script>
+    const minute_ticker = document.getElementById("minute-ticker") ; 
+    const second_ticker = document.getElementById("second-ticker") ;
+
+    let minutes = 0 
+    let seconds = 0 
+
+  /* 
+  So every second, I need to be updating the second counter. Everytime the second counter is 9, it will update back to zero, and update the minute counter by 1. 
+  If the minute counter is 5, reset everything to 0 0
+  */ 
+
+    function updateTime () {
+        if (minutes === 5 && seconds === 9){
+            minutes = 0 
+            seconds = 0  
+            minute_ticker.innerText = minutes
+            second_ticker.innerText = seconds 
+        } else if (seconds === 9) {
+            seconds = 0 
+            minutes += 1  
+            minute_ticker.innerText = minutes
+            second_ticker.innerText = seconds
+        } else {
+            seconds += 1 
+            second_ticker.innerText = seconds 
+        }
+    }
+    const interval = setInterval(updateTime, 1000)
+
+</script>
+</body>
+</html>
