@@ -28,23 +28,23 @@ var lengthOfLIS = function (nums) {
 };
 
 var recursiveLTS = (nums) => {
-    let res = 1
-
-    function getItDone(numbers, i) {
-        if (i >= nums.length) { return }
-        if (nums[i] < nums[i + 1]) { numbers.push(nums[i]) }
-        res = Math.max(res, numbers.length)
-        getItDone(numbers, i + 1)
+    function dfs(ind, prev_index) {
+        if (ind === nums.length) { return 0; }
+        let notTake = 0 + dfs(ind + 1, prev_index);
+        let take = 0;
+        if (prev_index === -1 || nums[ind] > nums[prev_index]) {
+            take = 1 + dfs(ind + 1, ind);
+        }
+        return Math.max(take, notTake);
     }
-
-    getItDone([nums[0]], 0)
-    return res
+    return dfs(0, -1);
 }
 
 console.log(recursiveLTS([1, 2, 4, 3]))
 console.log(recursiveLTS([10, 9, 2, 5, 3, 7, 101, 18]))
-// console.log(lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]))
-// console.log(lengthOfLIS([1, 2, 4, 3]))
+console.log(lengthOfLIS([1, 2, 4, 3]))
+console.log(recursiveLTS([7, 7, 7, 7, 7, 7, 7]));
+console.log(recursiveLTS([0, 2, 4, 3]));
 
 /* 
 A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.
@@ -56,8 +56,6 @@ output: 4
 
 
 2, 3, 7, 101
-
-
 
 
 */
