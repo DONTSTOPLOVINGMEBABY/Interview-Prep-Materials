@@ -1,32 +1,40 @@
-// coin change ii
-
-/**
- * @param {number} amount
- * @param {number[]} coins
- * @return {number}
- */
 var change = function (amount, coins) {
-    // this solution is incorrect
-    const serialize = (curr_amount, num_coins) => {
-        return JSON.stringify([curr_amount, num_coins])
+    const serialize = (i, curr_amount) => {
+        return JSON.stringify([i, curr_amount])
     }
     let dp = {}
-    function dfs(curr_amount, num_coins) {
-        if (curr_amount < 0) { return 0 }
-        if (dp[serialize(curr_amount, num_coins)]) { return dp[serialize(curr_amount, num_coins)] }
-        if (curr_amount === 0) { return 1 }
-        let sum = 0
-        for (let c of coins) {
-            if (curr_amount - c >= 0) {
-                let thang = dfs(curr_amount - c, num_coins + 1)
-                dp[serialize(curr_amount, num_coins)] = thang
-            }
-        }
-        return dp[serialize(curr_amount, num_coins)]
+    function dfs(i, curr_amount) {
+
     }
-    return dfs(amount, 0)
+
 };
 
+const amount = 5, coins = [1, 2, 5]
+console.log(change(amount, coins))
+
+
+
+
+
+/* 
+We have amount = 5, coins = [1, 2, 5]
+
+                5
+            [1, 2, 5]
+
+
+            5
+            [2, 5]
+
+
+            5
+            [5]
+
+In order to avoid repeated paths, we won't use the same thing over and over again. 
+
+
+
+*/
 /* 
 var coinChange = function(coins, amount) {
     let dp = new Array(amount + 1).fill(amount + 1)
